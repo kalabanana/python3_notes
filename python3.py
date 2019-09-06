@@ -104,8 +104,124 @@ friends = [
 	{"name":"Ally","age":28},
 ]
 
+## destructuring the set of key value pairs onto friend and ages
+## If there's not enough value to destruct, it will return value error
 for friend, ages in friend_ages.items():
 	print(f"{friend}: {ages}")
 	
 if "Adam" in friend_ages:
 	print("Adam is one of my friends")
+	
+
+Destructuring:
+
+t = 1,5
+x, y = t
+print(x) ##1
+print(y) ##5
+
+
+head, *tail = [1,2,3,5,6]
+##head will be the first value
+##tail would be the rest
+
+*head, tail = [1,2,3,5,6]
+##head will be rest of the value
+##tail would be the last value
+
+
+#Function
+
+def hello():
+	print("Hello World")
+	
+#created a callable variable 
+
+def user_age_in_seconds():
+	user_age = int(input("Enter your age:"))
+	age_seconds = user_age*365*24*60*
+	print(f"{age_seconds} is how many seconds in your age.")
+
+
+user_age_in_seconds
+print("Thanks for using.")
+
+animal = []
+
+def add_animal():
+	animal.append("Wolf")
+
+add_animal()
+add_animal()
+add_animal()
+
+print(animal) ## ['Wolf','Wolf','Wolf']
+
+def say_hello(surname, name):
+	print(f"Hello, {name} {surname}")
+
+say_hello(name="Bob",surname="Smoth")
+
+or 
+
+say_hello("Smoth", name="bob")
+#positional arguments go first and keyword arguments go later
+
+def add(x, y=8):
+	return x+y
+add(5) #print 13, default parameter must go at the end
+
+default_y = 3
+
+def add(x, y=default_y)
+	return x + y
+	
+default_y = 6
+
+##Do not recommend assigning variable name as the value in an parameter, and dafult_y will not change to 6 because y is defined when the function is created and it will not change after when you try to reassign
+
+None: #means no value, missing value or undeclared in python
+
+
+#Lambda functions: #exclusively use for I/O, can be difficult to read
+
+lambda x,y: x + y
+# no need to specify return key word
+
+#function that has a name
+add = lambda x,y: x+y
+print(add(5,6)) #11
+
+# ex.1
+def double(x):
+	return x*2
+	
+sequence = [1,3,5,9]
+doubled = [double(x) for x in sequence]
+#similar to js
+doubled = map(double, sequence)
+
+#lambda function
+doubled = list (map (lambda x:x*2, sequence))
+#map will return a map object, surround by list to see them in console
+
+
+# Dictionary comprehension
+user = [
+	(0,"Rolf","password")
+	(1,"Bob","usernam1")
+	(1,"Bob1","usernam12")
+]
+
+user_mapping = {user[1]: user for user in users}
+#prints {"Rolf": (0,'Rolf','password')}
+
+username_input = input("Enter your username")
+password_input = input("Enter your password")
+
+_, user, passw = user_mapping[username_input]
+
+if password_input == password:
+	print ("You are Login")
+else:
+	print("Sorry, the password did not match")
