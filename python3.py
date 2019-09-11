@@ -225,3 +225,49 @@ if password_input == password:
 	print ("You are Login")
 else:
 	print("Sorry, the password did not match")
+	
+#Multiple Args
+def multiply (*args):
+	total = 1
+	for arg in args:
+		total = total * arg
+	return total
+	
+print(multiply(1,3,4)) 
+print(multiply(-1))
+
+def add(x,y):
+	return x+y
+	
+num = [4,5]
+print(add(*num)) ## very similar to spread function
+
+##In dictionary term
+
+nums = {"x":2, "y":25}
+print(add(**nums))
+
+
+
+##Touples
+
+def apply(*arg, operator):
+	if operator == "*":
+		return multiply(*args) ## unpack it so to takes in the individual value in touple
+	elif operator == "+":
+		return sum(args)
+	else:
+		return "No valid operator provided to apply()"
+		
+print(apply(1,3,4,6, operator = "*"))
+
+
+#Dictionary
+
+def named(name, age):
+	print(name, age)
+	
+details = {"name": "Bob", "age":25}
+
+named(details) ## yield {"name": "Bob", "age":25}
+named(**details) ## yield  Bob 25
