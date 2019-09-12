@@ -133,3 +133,119 @@ class Store:
         # Return a string representing the argument
         # It should be in the format 'NAME, total stock price: TOTAL'
         return "{}, total stock price: {}".format(store.name, int(store.stock_price()))
+
+		
+##
+
+class Device:
+	def __init__(self, name, connected_by)
+		self.name = name
+		self.connected_by = connected_by
+		self.connected = True
+	
+	def __str__ (self):
+		return f"Device {self.name!r} ({self.connected_by})"
+		# !r wrapper into quotes
+		# Device 'Printer 250' (Phone)
+		
+	def disconnect(self):
+		self.connected = False
+		print("Disconnected")
+		
+printer = Device ("Printer 250", "Phone")
+print(printer)
+
+#now to disconnect
+printer.disconnect() #prints Disconnected
+
+
+## Inheritance, keyword IS: printer is a Device
+class Printer(Device):
+	def __init__(self, name, connected_by, capacity):
+		super().__init__(name, connected_by)
+		self.capacity = capacity # max capacity
+		self.remain_pages = capacity # how much it remains
+		
+	def __str__(self):
+		return f"{super().__str__()} ({self.remain_pages} ava. pages remain)"
+	
+	def printing(self, pages):
+		if not self.connected:
+			print("Printer is not connected")
+			return
+		print(f"Printing {pages} pages.")
+		self.remain_pages -= pages
+		
+printer = Printer("Printer 111", "USB", 500)
+printer.printing(20)
+
+print(printer)
+# Device 'Printer' (USB) (480 ava. pages remain)
+
+printer.disconnect()
+# it will try to start looking from Printer, if it's not there, then it goes up to Device, and Device actually inherits from Python Object Class (3 level check)
+
+printer.printing(50)
+# Printer is not connected
+
+
+#Composition, keyword HAS, Bookshelf HAS books
+
+class BookShelf:
+	def __init__ (self, *books):
+		self.books = books
+	
+	def __str__(self):
+		return f"BookShelf with {len(self.books)} books."
+		
+shelf = BookShelf(300)
+
+class Book:
+	def __init__(self,name):
+		self.name = name;
+		
+	def __str__(self):
+		return f"Book {self.name}"
+		
+book = Book("Book Name1")
+book2 = Book("Book Name2")
+
+shelf = BookShelf(book, book2)
+
+print(shelf)
+
+#Type Hinting 3.5
+
+def list_avg(sequence: List) -> float: #signal to return Float type
+	return sum(sequence) / len(sequence)
+
+list.avg(123) 
+# it will hint that you should use a LIST not integer
+
+class Book:
+	def __init__(self, name: str, page_count: int):
+		self.name = name
+		self.page_count = page_count
+		
+class Book:
+	TYPES = ("hardcover","paperback")
+	#only book will use it?
+	
+	def __init__(self, name: str, book_type, weight:int):
+		self.name = name
+		self.book_type = book_type
+		self.weight = weight
+		
+	def __repr__(self) -> str:
+		return f"<Book {self.name}, {self.book_type}, weight {self.weight}>"
+	
+	@classmethod
+	def hardcover(cls, name: str, page_weight:int) -> "Book":
+		return cls(name, cls.TYPES[0], page_weight + 100)
+		
+	##new object inside a class
+	
+	@classmethod
+	def paperback(cls, name: str, page_weight:int) -> "Book":
+		return cls(name, cls.TYPES[1], page_weight)
+		
